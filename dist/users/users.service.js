@@ -16,6 +16,10 @@ let UsersService = class UsersService {
     findOne(id) {
         return this.users[id];
     }
+    create(dto) {
+        this.users.push(dto.name);
+        return this.users;
+    }
 };
 exports.UsersService = UsersService;
 exports.UsersService = UsersService = __decorate([
