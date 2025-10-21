@@ -12,9 +12,6 @@ let AppService = class AppService {
     getHello() {
         return 'Bienvenue dans mon premier projet NestJS !';
     }
-    getHelloName(name) {
-        return `Hello ${name}!`;
-    }
 };
 exports.AppService = AppService;
 exports.AppService = AppService = __decorate([
