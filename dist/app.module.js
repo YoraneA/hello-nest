@@ -11,12 +11,22 @@ const common_1 = require("@nestjs/common");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const users_module_1 = require("./users/users.module");
+const typeorm_1 = require("@nestjs/typeorm");
+const user_entity_1 = require("./users/entity/user.entity");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [users_module_1.UsersModule],
+        imports: [
+            users_module_1.UsersModule,
+            typeorm_1.TypeOrmModule.forRoot({
+                type: 'sqlite',
+                database: 'database.sqlite',
+                entities: [user_entity_1.User],
+                synchronize: true,
+            }),
+        ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })

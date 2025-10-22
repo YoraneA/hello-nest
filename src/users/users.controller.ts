@@ -1,32 +1,29 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Param,
-  Post,
-  UsePipes,
-  ValidationPipe,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { CreateUserDto } from './dto/create-user.dto';
+import { User } from './entity/user.entity';
+import { DeleteResult } from 'typeorm';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Get()
-  findAll() {
+  findAll(): Promise<User[]> {
     return this.usersService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.usersService.findOne(+id);
+  findOne(@Param('id') id: string): Promise<User | null> {
+    return this.usersService.findOne(Number(id));
   }
 
   @Post()
-  @UsePipes(new ValidationPipe({ transform: true }))
-  create(@Body() dto: CreateUserDto) {
-    return this.usersService.create(dto);
+  create(@Body() userData: Partial<User>): Promise<User> {
+    return this.usersService.create(userData);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string): Promise<DeleteResult> {
+    return this.usersService.remove(Number(id));
   }
 }
