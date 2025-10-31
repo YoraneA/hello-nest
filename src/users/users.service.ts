@@ -18,11 +18,11 @@ export class UsersService {
     return this.userRepository.findOneBy({ id });
   }
 
-  async create(userData: Partial<User>): Promise<User> {
+  create(userData: Partial<User>): Promise<User> {
     return this.userRepository.save(this.userRepository.create(userData));
   }
 
-  async remove(id: number): Promise<DeleteResult> {
+  remove(id: number): Promise<DeleteResult> {
     return this.userRepository.delete(id);
   }
 }

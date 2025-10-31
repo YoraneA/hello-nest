@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './entity/user.entity';
 import { DeleteResult } from 'typeorm';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -18,8 +19,8 @@ export class UsersController {
   }
 
   @Post()
-  create(@Body() userData: Partial<User>): Promise<User> {
-    return this.usersService.create(userData);
+  create(@Body() createUserDto: CreateUserDto): Promise<User> {
+    return this.usersService.create(createUserDto);
   }
 
   @Delete(':id')
